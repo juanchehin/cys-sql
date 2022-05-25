@@ -14,22 +14,25 @@ SALIR:BEGIN
 				NULL AS Id;
 		ROLLBACK;
 	END;
-    SELECT 	e.Nombre,
+    
+    (SELECT 	e.Nombre,
 			e.Posicion,
             'Si' as vacacionesAbril
             FROM vacaciones_2021 v
             INNER JOIN emp e
             ON v.id_emp = e.ID
             WHERE	v.fecha
-            BETWEEN '2023-04-01' AND '2023-04-30'; 
-            
+            BETWEEN '2023-04-01' AND '2023-04-30'
+	)
+    UNION
+    (            
 	SELECT 	e.Nombre,
 			e.Posicion,
             'No' as vacacionesAbril
             FROM vacaciones_2021 v
             INNER JOIN emp e
             ON v.id_emp = e.ID
-            WHERE	v.fecha < '2023-04-01' OR v.fecha > '2023-04-30'; 
-
+            WHERE	v.fecha < '2023-04-01' OR v.fecha > '2023-04-30'
+	);
 END $$
 DELIMITER ;
