@@ -10,8 +10,7 @@ SALIR:BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		SHOW ERRORS;
-		SELECT 'Error en la transacción. Contáctese con el administrador.' Mensaje,
-				NULL AS Id;
+		SELECT 'Error en la transacción. Contáctese con el administrador.' Mensaje;
 		ROLLBACK;
 	END;
     SELECT 	e.Posicion,

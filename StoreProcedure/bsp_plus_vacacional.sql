@@ -10,19 +10,18 @@ SALIR:BEGIN
 	DECLARE EXIT HANDLER FOR SQLEXCEPTION
 	BEGIN
 		SHOW ERRORS;
-		SELECT 'Error en la transacción. Contáctese con el administrador.' Mensaje,
-				NULL AS Id;
+		SELECT 'Error en la transacción. Contáctese con el administrador.' Mensaje;
 		ROLLBACK;
 	END;
     
-    (SELECT 	e.Nombre,
+    (SELECT e.Nombre,
 			e.Posicion,
             'Si' as vacacionesAbril
             FROM vacaciones_2021 v
             INNER JOIN emp e
             ON v.id_emp = e.ID
             WHERE	v.fecha
-            BETWEEN '2023-04-01' AND '2023-04-30'
+            BETWEEN '2021-04-01' AND '2021-04-30'
 	)
     UNION
     (            
@@ -32,7 +31,7 @@ SALIR:BEGIN
             FROM vacaciones_2021 v
             INNER JOIN emp e
             ON v.id_emp = e.ID
-            WHERE	v.fecha < '2023-04-01' OR v.fecha > '2023-04-30'
+            WHERE	v.fecha < '2021-04-01' OR v.fecha > '2021-04-30'
 	);
 END $$
 DELIMITER ;
